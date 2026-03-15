@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a1c3677e4eb9aa4faf4ac0d9b3c1e5e, type: 3}
-  m_Name: New Basic Search Card
+  m_Name: 2 Search
   m_EditorClassIdentifier: Assembly-CSharp::BasicSearchCard
   searchName: 
   searchDescription: 
-  searchValue: 5
+  searchValue: 2
   searchSprite: {fileID: 0}
   searchType: 03000000

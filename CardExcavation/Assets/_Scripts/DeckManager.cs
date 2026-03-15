@@ -4,24 +4,36 @@ using UnityEngine;
 
 public class DeckManager : MonoBehaviour
 {
-    [Header("Getting Deck info")]
+    //This is for the drawing deck
+    [Header("Draw Deck:Getting Deck info")]
     public DeckSO deckSO;
     private List<CardSO> cardID;
     private List<int> deckAmount;
     public Dictionary<CardSO, int> deckDictionary = new Dictionary<CardSO, int>();
-    [Header("Active Deck Info")]
+    [Header("Search Deck:Active Deck Info")]
     public List<CardSO> activeDeck;
     private GameObject activeCard;//This will be public later
-    [Header("Search Deck info")]
+    [Header("Search Deck: Getting Deck Info")]
+    public SearchDeckSO searchDeckSO;
+    private List<SearchCardsSo> searchCardID;
+    private List<int> searchDeckAmount;
+    public Dictionary<SearchCardsSo, int> searchDeckDictionary = new Dictionary<SearchCardsSo, int>();
+    [Header("Search Deck: Active Deck Info")]
+    public List<SearchCardsSo> searchDeckHand;
+    public List<SearchCardsSo> searchDeckDraw;
+    public List<SearchCardsSo> searchDeckDiscard;
+
+    [Header("Search Deck info (Used in search deck cards)")]
     public List<CardSO> searchDeck;
     private void Awake()
     {
-        GenerateGettingDeck();
-        GenerateActiveDeck();
+        GenerateDrawDeck();
+        GenerateSearchDeck();
     }
-
-    void GenerateGettingDeck()
+    #region Generate Deck
+    void GenerateDrawDeck()
     {
+        //This is for the drawing Deck
         //Getting the lists from the SO
         cardID = deckSO.cardID;
         deckAmount = deckSO.deckAmmount;
@@ -29,7 +41,7 @@ public class DeckManager : MonoBehaviour
         //Copying the lists into a dictionary
         if (cardID.Count != deckAmount.Count)
         {
-            Debug.LogError("The lists are not the same length!");
+            Debug.LogError("Draw Deck: The lists are not the same length!");
             return;
         }
         for (int i = 0; i < cardID.Count; i++)
@@ -46,13 +58,36 @@ public class DeckManager : MonoBehaviour
                 Debug.LogWarning("Duplicate card: " + card.name);
             }
         }
-        //This is to print out the deckDictionary normally you can have this commented out
-        // foreach (var entry in deckDictionary)
-        // {
-        //     Debug.Log(entry.Key.name + " : " + entry.Value);
-        // }
+        GenerateActiveDrawDeck();
     }
-    void GenerateActiveDeck()
+    void GenerateSearchDeck()
+    {
+        searchCardID = searchDeckSO.searchCardID;
+        searchDeckAmount = searchDeckSO.searchDeckAmonut;
+
+        if (searchCardID.Count != searchDeckAmount.Count)
+        {
+            Debug.LogError("Search Deck:The lists are not the same length!");
+            return;
+        }
+        for (int i = 0; i < searchCardID.Count; i++)
+        {
+            SearchCardsSo card = searchCardID[i];
+            int amount = searchDeckAmount[i];
+            if (!searchDeckDictionary.ContainsKey(card))
+            {
+                searchDeckDictionary.Add(card, amount);
+            }
+            else
+            {
+                Debug.LogWarning("Duplicate card: " + card.name);
+            }
+        }
+        GenerateActiveSearchDeck();
+    }
+    #endregion
+    #region Generate Active Deck
+    void GenerateActiveDrawDeck()
     {
         activeDeck.Clear();
         foreach (var info in deckDictionary)
@@ -65,9 +100,26 @@ public class DeckManager : MonoBehaviour
                 activeDeck.Add(card);
             }
         }
-        RandomizeDeck();
+        RandomizeDrawDeck();
     }
-    void RandomizeDeck()
+    void GenerateActiveSearchDeck()
+    {
+        searchDeckDraw.Clear();
+        foreach (var info in searchDeckDictionary)
+        {
+            SearchCardsSo card = info.Key;
+            int amount = info.Value;
+
+            for (int i = 0; i < amount; i++)
+            {
+                searchDeckDraw.Add(card);
+            }
+        }
+        RandomizeSearchDeck();
+    }
+    #endregion
+    #region  Randomize Deck
+    void RandomizeDrawDeck()
     {
         for (int i = 0; i < activeDeck.Count; i++)
         {
@@ -78,9 +130,15 @@ public class DeckManager : MonoBehaviour
             activeDeck[randomIndex] = temp;
         }
     }
-
-    public void SearchDeck(int Value)
+    void RandomizeSearchDeck()
     {
-
+        for (int i = 0; i < searchDeckDraw.Count; i++)
+        {
+            int randomIndex = Random.Range(i, searchDeckDraw.Count);
+            SearchCardsSo temp = searchDeckDraw[i];
+            searchDeckDraw[i] = searchDeckDraw[randomIndex];
+            searchDeckDraw[randomIndex] = temp;
+        }
     }
+    #endregion
 }
