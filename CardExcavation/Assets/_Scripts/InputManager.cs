@@ -1,16 +1,41 @@
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private PlayerInput playerInput;
+    public bool shopOpen;
+    public bool inventoryOpen;
+
+    private void Awake()
     {
-        
+        shopOpen = false;
+        inventoryOpen = false;
+    }
+    void OnEnable()
+    {
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void OnClick(InputAction.CallbackContext context)
     {
-        
+
+    }
+    public void OnShop(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            shopOpen = !shopOpen;
+            inventoryOpen = false;
+            Debug.Log("Shop toggled: " + shopOpen);
+        }
+    }
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            inventoryOpen = !inventoryOpen;
+            shopOpen = false;
+            Debug.Log("Inventory toggled: " + inventoryOpen);
+        }
     }
 }

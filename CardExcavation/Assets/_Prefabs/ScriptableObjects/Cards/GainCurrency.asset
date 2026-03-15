@@ -15,6 +15,7 @@ MonoBehaviour:
   cardName: Gain 1 currency
   cardDescription: Gain 1 currency
   cardSprite: {fileID: 0}
+  cardType: 1
   ammount: 1
   isGained: 1
   isDept: 0

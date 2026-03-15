@@ -16,4 +16,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: df99339e27cd8774aa3a2dd9370f76bf, type: 2}
   - {fileID: 11400000, guid: 402ad8ac19cfb0a4d861808702950a03, type: 2}
   - {fileID: 11400000, guid: 8528b35b417acbb479ae5600b5155ef2, type: 2}
-  deckAmmount: 0a0000000500000002000000
+  - {fileID: 11400000, guid: a5542cea4e752fa44a8c55d84bcc80b0, type: 2}
+  deckAmmount: 0a000000050000000200000004000000

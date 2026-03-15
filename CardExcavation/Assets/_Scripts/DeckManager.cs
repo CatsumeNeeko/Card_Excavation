@@ -78,4 +78,9 @@ public class DeckManager : MonoBehaviour
             activeDeck[randomIndex] = temp;
         }
     }
+
+    public void SearchDeck(int Value)
+    {
+
+    }
 }
