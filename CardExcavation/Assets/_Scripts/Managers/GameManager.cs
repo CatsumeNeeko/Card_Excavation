@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public DeckManager deckManager;
     public ItemManager itemManager;
     public InputManager inputManager;
+
+    public float timeLeft;
     private void Awake()
     {
         Instance = this;

@@ -23,6 +23,8 @@ public class DeckManager : MonoBehaviour
     public List<SearchCardsSo> searchDeckDraw;
     public List<SearchCardsSo> searchDeckDiscard;
 
+    private int handDrawSize = 5;
+    private int handSize = 10;
     [Header("Search Deck info (Used in search deck cards)")]
     public List<CardSO> searchDeck;
     private void Awake()
@@ -30,6 +32,7 @@ public class DeckManager : MonoBehaviour
         GenerateDrawDeck();
         GenerateSearchDeck();
     }
+    #region Generating Decks
     #region Generate Deck
     void GenerateDrawDeck()
     {
@@ -141,4 +144,38 @@ public class DeckManager : MonoBehaviour
         }
     }
     #endregion
+    #endregion
+    public void DrawSearchHand()
+    {
+        //IF not check if draw is == 0 is true shuffle deck then draw 
+        //IF not draw the ammount that is avaliable and then shuffle then draw whatever the excess is 
+        if (searchDeckDraw.Count >= handDrawSize)///IF draw deck has more then draw size
+        {
+            for (int i = 0; i < handDrawSize; i++)
+            {
+                searchDeckHand.Add(searchDeckDraw[0]);
+                searchDeckDraw.Remove(searchDeckDraw[0]);
+            }
+        }
+        else if (searchDeckDraw.Count < handDrawSize)
+        {
+            int excessDraw = handDrawSize - searchDeckDraw.Count;
+
+            for (int i = 0; i < searchDeckDraw.Count; i++)
+            {
+                searchDeckHand.Add(searchDeckDraw[0]);
+                searchDeckDraw.Remove(searchDeckDraw[0]);
+            }
+            for (int i = 0; i < excessDraw; i++)
+            {
+                searchDeckHand.Add(searchDeckDraw[0]);
+                searchDeckDraw.Remove(searchDeckDraw[0]);
+            }
+        }
+    }
+
+    public void DrawDeckCard()
+    {
+
+    }
 }
