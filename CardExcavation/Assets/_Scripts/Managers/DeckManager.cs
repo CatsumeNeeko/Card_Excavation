@@ -7,13 +7,14 @@ public class DeckManager : MonoBehaviour
     //This is for the drawing deck
     [Header("Draw Deck:Getting Deck info")]
     public DeckSO deckSO;
+    public GameManager gameManager;
     private List<CardSO> cardID;
     private List<int> deckAmount;
     public Dictionary<CardSO, int> deckDictionary = new Dictionary<CardSO, int>();
-    [Header("Search Deck:Active Deck Info")]
+    [Header("Draw Deck:Active Deck Info")]
     public List<CardSO> activeDeck;
     private GameObject activeCard;//This will be public later
-    [Header("Search Deck: Getting Deck Info")]
+    [Header("Search Deck: Getting Deck Info")]//These variables will be changed from a scriptable object to a gameobject 
     public SearchDeckSO searchDeckSO;
     private List<SearchCardsSo> searchCardID;
     private List<int> searchDeckAmount;
@@ -29,6 +30,7 @@ public class DeckManager : MonoBehaviour
     public List<CardSO> searchDeck;
     private void Awake()
     {
+        gameManager = GetComponent<GameManager>();
         GenerateDrawDeck();
         GenerateSearchDeck();
     }
@@ -175,6 +177,12 @@ public class DeckManager : MonoBehaviour
     }
 
     public void DrawDeckCard()
+    {
+
+    }
+
+    public void ShuffleDrawDeck() { }
+    public void ShuffleSearchDeck()
     {
 
     }

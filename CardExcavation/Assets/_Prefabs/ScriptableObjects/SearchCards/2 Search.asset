@@ -15,5 +15,5 @@ MonoBehaviour:
   searchName: 
   searchDescription: 
   searchValue: 2
-  searchSprite: {fileID: 0}
+  searchSprite: {fileID: 21300000, guid: 4d42a8e578cf89c46b00700bffe1f37e, type: 3}
   searchType: 03000000

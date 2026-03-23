@@ -11,5 +11,7 @@ public class SearchCardsSo : ScriptableObject
 
     public virtual void SearchCardEvent() { }
 
+    public virtual void OnDiscardEvent() { }
 
+    public virtual void OnDrawEvent() { }
 }
